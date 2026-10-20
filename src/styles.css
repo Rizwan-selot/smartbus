@@ -1,0 +1,151 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* SmartBus design tokens — see /design.md. Exact-replication palette. */
+@theme inline {
+  --font-sans: "Open Sans", Arial, sans-serif;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* SmartBus specific */
+  --color-sb-sidebar: var(--sb-sidebar);
+  --color-sb-sidebar-active: var(--sb-sidebar-active);
+  --color-sb-sidebar-fg: var(--sb-sidebar-fg);
+  --color-sb-logo: var(--sb-logo);
+  --color-sb-menu: var(--sb-menu);
+  --color-sb-menu-hover: var(--sb-menu-hover);
+  --color-sb-header: var(--sb-header);
+  --color-sb-header-fg: var(--sb-header-fg);
+  --color-sb-workspace: var(--sb-workspace);
+  --color-sb-panel: var(--sb-panel);
+  --color-sb-group: var(--sb-group);
+  --color-sb-subgroup: var(--sb-subgroup);
+  --color-sb-row-sel: var(--sb-row-sel);
+  --color-sb-grid-head: var(--sb-grid-head);
+  --color-sb-grid-line: var(--sb-grid-line);
+  --color-sb-text: var(--sb-text);
+  --color-sb-text-dim: var(--sb-text-dim);
+  --color-sb-link: var(--sb-link);
+  --color-sb-ok: var(--sb-ok);
+  --color-sb-ok-bg: var(--sb-ok-bg);
+  --color-sb-done: var(--sb-done);
+  --color-sb-done-bg: var(--sb-done-bg);
+  --color-sb-warn: var(--sb-warn);
+  --color-sb-warn-bg: var(--sb-warn-bg);
+  --color-sb-fail: var(--sb-fail);
+  --color-sb-fail-bg: var(--sb-fail-bg);
+  --color-sb-total-bg: var(--sb-total-bg);
+  --color-sb-inactive: var(--sb-inactive);
+  --color-sb-inactive-bg: var(--sb-inactive-bg);
+  --color-sb-badge-ok: var(--sb-badge-ok);
+  --color-sb-badge-fail: var(--sb-badge-fail);
+  --color-sb-day: var(--sb-day);
+  --color-sb-checkpoint: var(--sb-checkpoint);
+  --color-sb-route: var(--sb-route);
+  --color-sb-video-bg: var(--sb-video-bg);
+  --color-sb-topline: var(--sb-topline);
+}
+
+:root {
+  --radius: 3px;
+  --background: #ffffff;
+  --foreground: #333333;
+  --card: #ffffff;
+  --card-foreground: #333333;
+  --popover: #ffffff;
+  --popover-foreground: #333333;
+  --primary: #4a4a4a;
+  --primary-foreground: #ffffff;
+  --secondary: #eeeeee;
+  --secondary-foreground: #333333;
+  --muted: #f2f2f2;
+  --muted-foreground: #777777;
+  --accent: #e8e8e8;
+  --accent-foreground: #333333;
+  --destructive: #e60000;
+  --destructive-foreground: #ffffff;
+  --border: #d4d4d4;
+  --input: #c8c8c8;
+  --ring: #3b5bfd;
+
+  --sb-sidebar: #6b6b6b;
+  --sb-sidebar-active: #4f4f4f;
+  --sb-sidebar-fg: #ffffff;
+  --sb-logo: #f9c80e;
+  --sb-menu: #5c5c5c;
+  --sb-menu-hover: #4a4a4a;
+  --sb-header: #3e3e3e;
+  --sb-header-fg: #ffffff;
+  --sb-workspace: #e9e9e9;
+  --sb-panel: #ffffff;
+  --sb-group: #d6d6d6;
+  --sb-subgroup: #e6e6e6;
+  --sb-row-sel: #dfe6ff;
+  --sb-grid-head: #ececec;
+  --sb-grid-line: #d9d9d9;
+  --sb-text: #333333;
+  --sb-text-dim: #555555;
+  --sb-link: #1f1fd6;
+  --sb-ok: #2e8b2e;
+  --sb-ok-bg: #d4f3cf;
+  --sb-done: #2a2ad0;
+  --sb-done-bg: #c9ccfb;
+  --sb-warn: #e08a00;
+  --sb-warn-bg: #fff0c2;
+  --sb-fail: #e01b1b;
+  --sb-fail-bg: #ffcaca;
+  --sb-total-bg: #d9d9d9;
+  --sb-inactive: #2a2ad0;
+  --sb-inactive-bg: #d3d6fb;
+  --sb-badge-ok: #12a012;
+  --sb-badge-fail: #ff0000;
+  --sb-day: #3b5bfd;
+  --sb-checkpoint: #f0a020;
+  --sb-route: #6a6a6a;
+  --sb-video-bg: #1a1a1a;
+  --sb-topline: #1f4f4f;
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body { height: 100%; }
+  body {
+    background-color: var(--sb-workspace);
+    color: var(--sb-text);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    overflow: hidden;
+  }
+}
+
+@utility sb-scroll {
+  &::-webkit-scrollbar { width: 6px; height: 6px; }
+  &::-webkit-scrollbar-thumb { background: #b5b5b5; border-radius: 3px; }
+  &::-webkit-scrollbar-track { background: #f0f0f0; }
+}
+
+.leaflet-container { font-family: var(--font-sans); background: #f2efe9; }
+.sb-cp { background: var(--sb-checkpoint); color: #fff; border: 3px solid #2f6fe0; border-radius: 9999px; font-size: 10px; font-weight: 700; display:flex; align-items:center; justify-content:center; box-shadow: 0 0 0 2px #fff; }
