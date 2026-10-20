@@ -1,4 +1,4 @@
-import { History, MessageSquare, Lock, UserCheck, RefreshCw, PlusCircle, Clock, Shield } from "lucide-react";
+import { History, MessageSquare, FileText, User, RefreshCw, PlusCircle, Clock } from "lucide-react";
 import type { ComplaintActivity } from "@/types/complaints";
 
 interface Props {
@@ -9,48 +9,35 @@ export function ComplaintActivityHistory({ activities }: Props) {
   const getBadgeAndIcon = (act: ComplaintActivity) => {
     if (act.type === "parent_reply") {
       return {
-        icon: <MessageSquare className="h-3.5 w-3.5 text-sb-done shrink-0" />,
-        badge: (
-          <span className="inline-flex items-center gap-1 rounded-xs bg-sb-done-bg px-1.5 py-0.5 text-[10px] font-semibold text-sb-done">
-            Parent Visible
-          </span>
-        ),
-        bgClass: "bg-[#F7F9FF]",
+        icon: <MessageSquare className="h-4 w-4 fill-[#2563EB] text-[#2563EB] shrink-0" />,
+        bgClass: "bg-[#F0F5FF]",
       };
     }
 
     if (act.type === "internal_note") {
       return {
-        icon: <Lock className="h-3.5 w-3.5 text-sb-warn shrink-0" />,
-        badge: (
-          <span className="inline-flex items-center gap-1 rounded-xs bg-sb-warn-bg px-1.5 py-0.5 text-[10px] font-semibold text-sb-warn">
-            Internal Note
-          </span>
-        ),
-        bgClass: "bg-[#FFFDF4]",
+        icon: <FileText className="h-4 w-4 fill-[#F59E0B] text-[#F59E0B] shrink-0" />,
+        bgClass: "bg-[#FFFDE8]",
       };
     }
 
     if (act.type === "assigned") {
       return {
-        icon: <UserCheck className="h-3.5 w-3.5 text-sb-text-dim shrink-0" />,
-        badge: null,
-        bgClass: "bg-sb-panel",
+        icon: <User className="h-4 w-4 fill-[#374151] text-[#374151] shrink-0" />,
+        bgClass: "bg-white",
       };
     }
 
     if (act.type === "status_change") {
       return {
-        icon: <RefreshCw className="h-3.5 w-3.5 text-sb-link shrink-0" />,
-        badge: null,
-        bgClass: "bg-sb-panel",
+        icon: <RefreshCw className="h-4 w-4 text-[#2563EB] stroke-[2.2] shrink-0" />,
+        bgClass: "bg-white",
       };
     }
 
     return {
-      icon: <PlusCircle className="h-3.5 w-3.5 text-sb-ok shrink-0" />,
-      badge: null,
-      bgClass: "bg-sb-panel",
+      icon: <PlusCircle className="h-4 w-4 fill-[#16A34A] text-white shrink-0" />,
+      bgClass: "bg-white",
     };
   };
 
@@ -67,7 +54,7 @@ export function ComplaintActivityHistory({ activities }: Props) {
       {/* Activity List */}
       <div className="divide-y divide-sb-grid-line/60">
         {activities.map((act) => {
-          const { icon, badge, bgClass } = getBadgeAndIcon(act);
+          const { icon, bgClass } = getBadgeAndIcon(act);
 
           return (
             <div key={act.id} className={`flex flex-col p-2.5 text-[12px] ${bgClass}`}>
@@ -75,23 +62,22 @@ export function ComplaintActivityHistory({ activities }: Props) {
                 <div className="flex items-center gap-2">
                   {icon}
                   <span className="font-semibold text-sb-text">{act.action}</span>
-                  {badge}
                 </div>
 
                 <div className="flex items-center gap-3 text-[11px] text-sb-text-dim shrink-0">
                   <span className="font-medium text-sb-text">
-                    By: <strong>{act.actor}</strong>
+                    By: <strong>{act.actor || "Operations"}</strong>
                   </span>
                   <span className="flex items-center gap-1">
-                    <Clock className="h-3 w-3" />
-                    {act.timestamp}
+                    <Clock className="h-3.5 w-3.5 fill-[#374151] text-white shrink-0" />
+                    <span>{act.timestamp}</span>
                   </span>
                 </div>
               </div>
 
-              {/* Message content for replies and notes, excluding repeated created description */}
+              {/* Message content for replies and notes */}
               {act.message && act.type !== "created" && (
-                <div className="mt-1.5 ml-5 rounded-xs border border-sb-grid-line/80 bg-sb-panel p-2 text-[11.5px] text-sb-text leading-relaxed select-text">
+                <div className="mt-1 ml-6 text-[12px] text-sb-text leading-relaxed select-text">
                   {act.message}
                 </div>
               )}

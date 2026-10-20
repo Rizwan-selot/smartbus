@@ -32,9 +32,9 @@ const REPORT_MENU: Record<string, string[]> = {
 const NAV = [
   { label: "Dashboard", icon: Gauge, to: "/" as const, key: "dashboard" },
   { label: "Tracking", icon: MapPin, to: "/" as const, key: "tracking" },
-  { label: "Reports", icon: FileText, to: null, key: "reports" },
-  { label: "Complaints", icon: MessageSquareWarning, to: "/complaints" as const, key: "complaints" },
   { label: "Chart", icon: PieChart, to: "/" as const, key: "chart" },
+  { label: "Complaints", icon: MessageSquareWarning, to: "/complaints" as const, key: "complaints" },
+  { label: "Reports", icon: FileText, to: null, key: "reports" },
   { label: "Settings", icon: Settings, to: "/" as const, key: "settings" },
 ];
 
@@ -52,9 +52,11 @@ export function MainSidebar() {
     <>
       <aside className="relative z-40 flex h-full w-[90px] shrink-0 flex-col bg-sb-sidebar text-sb-sidebar-fg">
         <div className="flex h-[96px] items-center justify-center">
-          <div className="flex h-[76px] w-[76px] items-center justify-center rounded-full bg-sb-logo">
-            <Bus className="h-9 w-9 text-sb-sidebar-fg" strokeWidth={1.8} />
-          </div>
+          <img
+            src="/uffizio-logo-white.png"
+            alt="uffizio"
+            className="h-[76px] w-[76px] object-contain drop-shadow-xs"
+          />
         </div>
         <div className="flex h-[78px] items-center justify-around px-2">
           <User className="h-6 w-6" strokeWidth={1.3} />

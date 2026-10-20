@@ -60,31 +60,28 @@ export function ComplaintDetailsPanel({
 
           {/* Parent Contact */}
           <div className="flex items-start border-b border-sb-grid-line/60 py-1.5">
-            <span className="w-[125px] shrink-0 text-sb-text-dim text-[11.5px]">Parent Contact</span>
+            <span className="w-[130px] shrink-0 text-sb-text-dim text-[11.5px]">Parent Contact:</span>
             <span className="text-sb-text">
-              {complaint.parentName}{" "}
+              {complaint.parentName}
               {complaint.parentPhone && (
-                <span className="text-sb-link ml-1">({complaint.parentPhone})</span>
+                <span className="text-[#1F4591] font-medium ml-1">| {complaint.parentPhone}</span>
               )}
             </span>
           </div>
 
           {/* Raised Date & Time */}
           <div className="flex items-start border-b border-sb-grid-line/60 py-1.5">
-            <span className="w-[125px] shrink-0 text-sb-text-dim text-[11.5px]">Raised Date & Time</span>
-            <span className="text-sb-text flex items-center gap-1">
-              <Clock className="h-3.5 w-3.5 text-sb-text-dim" />
-              {complaint.dateRaised}
-            </span>
+            <span className="w-[130px] shrink-0 text-sb-text-dim text-[11.5px]">Raised Date & Time:</span>
+            <span className="text-sb-text font-normal">{complaint.dateRaised}</span>
           </div>
         </div>
 
         {/* Complaint Description */}
         <div className="mt-3">
           <span className="mb-1 block text-[11.5px] font-semibold text-sb-text-dim">
-            Complaint Description
+            Complaint Description:
           </span>
-          <div className="rounded-xs border border-sb-grid-line bg-[#F8F9FA] p-2.5 text-[12px] text-sb-text leading-relaxed select-text">
+          <div className="rounded-[4px] border border-[#E5E7EB] bg-[#F9F9F9] p-2.5 text-[12px] text-sb-text leading-relaxed select-text">
             {complaint.description || "No description provided."}
           </div>
         </div>
@@ -92,15 +89,15 @@ export function ComplaintDetailsPanel({
         {/* Attachments */}
         <div className="mt-3">
           <div className="mb-1 flex items-center justify-between text-[11.5px] font-semibold text-sb-text-dim">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1.5">
               <Paperclip className="h-3.5 w-3.5" />
-              <span>Attachments ({complaint.attachments.length})</span>
+              <span>Attachment ({complaint.attachments.length})</span>
             </div>
             {onAddDummyAttachment && (
               <button
                 type="button"
                 onClick={onAddDummyAttachment}
-                className="flex items-center gap-1 text-[11px] font-medium text-sb-link hover:underline cursor-pointer"
+                className="flex items-center gap-1 text-[11px] font-medium text-[#1F4591] hover:underline cursor-pointer"
                 title="Add a dummy attachment"
               >
                 <Plus className="h-3 w-3" />
@@ -110,13 +107,13 @@ export function ComplaintDetailsPanel({
           </div>
 
           {complaint.attachments.length === 0 ? (
-            <div className="flex flex-col items-center justify-center gap-2 rounded-xs border border-dashed border-sb-grid-line p-4 text-center text-[11px] text-sb-text-dim bg-[#FAFAFA]">
+            <div className="flex flex-col items-center justify-center gap-2 rounded-[3px] border border-dashed border-sb-grid-line p-4 text-center text-[11px] text-sb-text-dim bg-[#FAFAFA]">
               <span>No attachments provided with this complaint.</span>
               {onAddDummyAttachment && (
                 <button
                   type="button"
                   onClick={onAddDummyAttachment}
-                  className="inline-flex items-center gap-1 rounded-xs border border-sb-grid-line bg-sb-panel px-2.5 py-1 text-[11px] font-medium text-sb-link hover:bg-sb-workspace shadow-2xs cursor-pointer"
+                  className="inline-flex items-center gap-1 rounded-[3px] border border-sb-grid-line bg-sb-panel px-2.5 py-1 text-[11px] font-medium text-[#1F4591] hover:bg-sb-workspace shadow-2xs cursor-pointer"
                 >
                   <Plus className="h-3 w-3" />
                   <span>Add Dummy File</span>
@@ -128,34 +125,31 @@ export function ComplaintDetailsPanel({
               {complaint.attachments.map((att) => (
                 <div
                   key={att.id}
-                  className="flex items-center justify-between rounded-xs border border-sb-grid-line bg-[#FAFAFA] px-2.5 py-1.5"
+                  className="flex items-center justify-between rounded-[3px] border border-[#E5E7EB] bg-white px-2.5 py-1.5"
                 >
                   <div className="flex items-center gap-2 truncate">
-                    <FileText className="h-4 w-4 text-sb-link shrink-0" />
+                    <FileText className="h-4 w-4 text-[#6B7280] shrink-0" />
                     <span className="truncate text-[12px] font-medium text-sb-text">{att.name}</span>
                     <span className="text-[10.5px] text-sb-text-dim shrink-0">({att.size})</span>
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0">
-                    {att.type === "image" && (
-                      <button
-                        type="button"
-                        onClick={() => onPreviewAttachment(att)}
-                        className="flex items-center gap-0.5 text-[11px] font-medium text-sb-link hover:underline"
-                        title="Preview attachment"
-                      >
-                        <Eye className="h-3.5 w-3.5" />
-                        <span>Preview</span>
-                      </button>
-                    )}
+                  <div className="flex items-center gap-3 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => onPreviewAttachment(att)}
+                      className="flex items-center gap-1 text-[11px] font-medium text-[#1F4591] hover:underline cursor-pointer"
+                      title="Preview attachment"
+                    >
+                      <Eye className="h-3.5 w-3.5" />
+                      <span>Preview</span>
+                    </button>
                     <button
                       type="button"
                       onClick={() => handleDownload(att)}
-                      className="flex items-center gap-0.5 text-[11px] font-medium text-sb-text-dim hover:text-sb-text"
+                      className="flex items-center text-[#1F4591] hover:opacity-80 cursor-pointer"
                       title="Download attachment"
                     >
                       <Download className="h-3.5 w-3.5" />
-                      <span>Download</span>
                     </button>
                   </div>
                 </div>
